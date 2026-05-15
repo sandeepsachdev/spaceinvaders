@@ -1,12 +1,12 @@
-package com.example.spaceinvaders;
+package com.example.galaga;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpaceInvadersApplication {
+public class GalagaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpaceInvadersApplication.class, args);
+        SpringApplication.run(GalagaApplication.class, args);
     }
 }

@@ -6,7 +6,7 @@
 
 body {
     background: #000;
-    color: #0f0;
+    color: #f00;
     font-family: 'Courier New', monospace;
     min-height: 100vh;
     display: flex;
@@ -18,7 +18,7 @@ body {
 
 .container {
     position: relative;
-    width: 640px;
+    width: 480px;
     max-width: 100vw;
     padding: 10px;
 }
@@ -28,16 +28,16 @@ body {
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    font-size: 16px;
+    font-size: 13px;
     letter-spacing: 2px;
     padding: 8px 4px;
-    border-bottom: 2px solid #0f0;
+    border-bottom: 2px solid #f00;
     margin-bottom: 6px;
 }
 
 .hud-item span {
     color: #ff3;
-    margin-left: 6px;
+    margin-left: 4px;
 }
 
 canvas {
@@ -46,8 +46,8 @@ canvas {
     width: 100%;
     height: auto;
     image-rendering: pixelated;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 24px rgba(0, 255, 0, 0.35);
+    border: 2px solid #33f;
+    box-shadow: 0 0 30px rgba(80, 80, 255, 0.45);
 }
 
 .overlay {
@@ -56,8 +56,8 @@ canvas {
     left: 10px;
     right: 10px;
     bottom: 40px;
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid #0f0;
+    background: rgba(0, 0, 0, 0.93);
+    border: 2px solid #33f;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,11 +72,12 @@ canvas {
 }
 
 .overlay h1 {
-    font-size: 42px;
-    color: #0f0;
-    letter-spacing: 6px;
-    margin-bottom: 18px;
-    text-shadow: 0 0 12px #0f0;
+    font-size: 56px;
+    color: #f33;
+    letter-spacing: 8px;
+    margin-bottom: 22px;
+    text-shadow: 0 0 14px #f33, 0 0 30px #f00;
+    font-weight: bold;
 }
 
 .overlay h2 {
@@ -84,6 +85,11 @@ canvas {
     color: #ff3;
     margin: 16px 0 8px;
     letter-spacing: 3px;
+}
+
+.overlay p {
+    color: #fff;
+    margin: 6px 0;
 }
 
 .legend {
@@ -94,18 +100,18 @@ canvas {
 }
 
 .legend span {
-    background: #0f0;
-    color: #000;
+    background: #33f;
+    color: #fff;
     padding: 2px 6px;
     font-weight: bold;
     border-radius: 2px;
 }
 
 button {
-    background: #0f0;
-    color: #000;
+    background: #33f;
+    color: #fff;
     border: none;
-    padding: 12px 36px;
+    padding: 12px 40px;
     font-family: inherit;
     font-size: 18px;
     font-weight: bold;
@@ -115,41 +121,41 @@ button {
 }
 
 button:hover {
-    background: #fff;
+    background: #f33;
 }
 
 input {
     background: #000;
-    color: #0f0;
-    border: 2px solid #0f0;
+    color: #ff3;
+    border: 2px solid #33f;
     padding: 8px;
     font-family: inherit;
     font-size: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    width: 160px;
+    width: 180px;
     margin: 8px;
 }
 
 .scores {
     margin-top: 14px;
-    width: 80%;
-    max-width: 340px;
+    width: 90%;
+    max-width: 360px;
 }
 
 #scoreList {
     list-style: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 13px;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 16px;
 }
 
 #scoreList li {
     display: flex;
     justify-content: space-between;
     padding: 2px 0;
-    border-bottom: 1px dashed #0a0;
+    border-bottom: 1px dashed #226;
 }
 
 #scoreList li span:last-child {
@@ -168,15 +174,34 @@ input {
     font-size: 14px;
 }
 
+.banner {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #ff3;
+    font-size: 38px;
+    letter-spacing: 8px;
+    text-shadow: 0 0 14px #ff3;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.banner.hidden {
+    display: none;
+}
+
 footer {
     text-align: center;
-    color: #555;
+    color: #444;
     font-size: 11px;
     margin-top: 10px;
     letter-spacing: 1px;
 }
 
-@media (max-width: 660px) {
-    .overlay h1 { font-size: 28px; }
-    .hud { font-size: 12px; }
+@media (max-width: 500px) {
+    .overlay h1 { font-size: 36px; }
+    .hud { font-size: 11px; }
 }

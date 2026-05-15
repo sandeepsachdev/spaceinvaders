@@ -1,28 +1,41 @@
-# Space Invaders
+# Galaga
 
-A classic Space Invaders clone built with Spring Boot (Java 17) and HTML5 Canvas. Designed to be containerized and deployed to Render in a couple of clicks.
+A Galaga clone built with Spring Boot (Java 17) and HTML5 Canvas. Containerized for one-click deployment to Render.
 
 ## Features
 
-- Classic Space Invaders gameplay: 5 rows x 11 columns of aliens, formation step movement, descending after edges, multiple waves with increasing difficulty
-- Player ship with 3 lives, single bullet on-screen at a time
-- Destructible barriers (4 shields)
-- Mystery UFO with random bonus points (50/100/150/300)
-- Sound effects (Web Audio API)
-- Local high-score persistence + server-side top-10 leaderboard via REST
-- Keyboard + touch controls (mobile-friendly)
+- **Swooping formation entrances** — enemies fly in along curved bezier paths from off-screen and slot into a 5-row formation (4 Boss Galagas, 16 Butterflies, 20 Bees)
+- **Diving attacks** — enemies break formation in waves, swoop down, fire aimed shots, then loop back to their slot
+- **Tractor beam capture** — Boss Galagas occasionally descend and try to capture your fighter with a tractor beam
+- **Dual fighter rescue** — destroy the boss holding your captured ship to recover it and gain twin-fighter firepower
+- **Challenging stages** — every 3rd stage, enemies fly through in pure-bonus patterns without firing
+- **Stage progression** with increasing difficulty
+- **Multicolor parallax starfield**
+- **Score popups, explosions, sound effects** (Web Audio API)
+- **Server-side top-10 leaderboard** with stage tracking + local high-score persistence
+- **Keyboard + touch controls** (mobile-friendly)
 
 ## Controls
 
 - Move: Arrow keys (or A / D)
 - Fire: Space (or Up arrow)
 - Pause: P
-- Mobile: tap left/right of the ship to move, tap top half of screen to fire
+- Mobile: tap left/right of the ship to move; tap top half of screen to fire
+
+## Scoring
+
+| Enemy       | In Formation | Diving |
+|-------------|--------------|--------|
+| Bee         | 50           | 100    |
+| Butterfly   | 80           | 160    |
+| Boss Galaga | 150          | 400    |
+
+Bonus: 1000 points for clearing a challenging stage cleanly.
 
 ## Run locally
 
 ```bash
-./mvnw spring-boot:run     # or: mvn spring-boot:run
+mvn spring-boot:run
 ```
 
 Then open http://localhost:8080
@@ -31,31 +44,30 @@ Then open http://localhost:8080
 
 ```bash
 mvn clean package
-java -jar target/spaceinvaders.jar
+java -jar target/galaga.jar
 ```
 
 ## Docker
 
 ```bash
-docker build -t spaceinvaders .
-docker run -p 8080:8080 spaceinvaders
+docker build -t galaga .
+docker run -p 8080:8080 galaga
 ```
 
 ## Deploy to Render
 
 1. Push this repository to GitHub.
-2. In Render, click **New +** -> **Web Service** and connect the repo.
-3. Render auto-detects `render.yaml`. Confirm the service:
+2. In Render, click **New +** → **Blueprint** and connect the repo. Render reads `render.yaml` and provisions the Docker web service automatically.
    - Runtime: Docker
    - Plan: Free
    - Health Check Path: `/`
-4. Click **Create Web Service**. Render builds the Dockerfile and starts the app on the `$PORT` it injects (the Spring Boot app honors it).
+3. Click **Apply**. Render builds the Dockerfile and starts the app on its injected `$PORT` (the Spring Boot app honors it).
 
-Alternatively, click **New +** -> **Blueprint** and point it at the repo - Render reads `render.yaml` automatically.
+Alternative: **New +** → **Web Service**, pick the repo, choose "Docker" runtime, and Render still picks up the Dockerfile.
 
 ## REST API
 
-- `GET  /api/scores` - returns top-10 leaderboard
-- `POST /api/scores` - body: `{ "name": "AAA", "score": 1234 }`
+- `GET  /api/scores` — returns the top-10 leaderboard
+- `POST /api/scores` — body: `{ "name": "AAA", "score": 12345, "stage": 4 }`
 
 Note: leaderboard is in-memory and resets on redeploy.

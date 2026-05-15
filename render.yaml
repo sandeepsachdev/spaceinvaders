@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: spaceinvaders
+    name: galaga
     runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile

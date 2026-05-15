@@ -1,4 +1,4 @@
-package com.example.spaceinvaders.controller;
+package com.example.galaga.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +31,7 @@ public class ScoreController {
         if (name.length() > 12) {
             name = name.substring(0, 12);
         }
-        scores.add(new ScoreEntry(name, Math.max(0, entry.score()), System.currentTimeMillis()));
+        scores.add(new ScoreEntry(name, Math.max(0, entry.score()), entry.stage(), System.currentTimeMillis()));
 
         List<ScoreEntry> sorted = new ArrayList<>(scores);
         sorted.sort(Comparator.comparingInt(ScoreEntry::score).reversed());
@@ -45,9 +45,9 @@ public class ScoreController {
         return sorted;
     }
 
-    public record ScoreEntry(String name, int score, long timestamp) {
-        public ScoreEntry(String name, int score) {
-            this(name, score, System.currentTimeMillis());
+    public record ScoreEntry(String name, int score, int stage, long timestamp) {
+        public ScoreEntry(String name, int score, int stage) {
+            this(name, score, stage, System.currentTimeMillis());
         }
     }
 }

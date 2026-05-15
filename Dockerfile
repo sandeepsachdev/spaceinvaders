@@ -9,7 +9,7 @@ RUN mvn -B clean package -DskipTests
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=build /app/target/spaceinvaders.jar app.jar
+COPY --from=build /app/target/galaga.jar app.jar
 
 ENV PORT=8080
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
