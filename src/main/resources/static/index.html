@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hud">
+            <div class="hud-item">SCORE <span id="score">0000</span></div>
+            <div class="hud-item">HI-SCORE <span id="hiscore">0000</span></div>
+            <div class="hud-item">WAVE <span id="wave">1</span></div>
+            <div class="hud-item">LIVES <span id="lives">3</span></div>
+        </header>
+
+        <canvas id="game" width="640" height="720"></canvas>
+
+        <div id="overlay" class="overlay">
+            <h1>SPACE INVADERS</h1>
+            <p class="legend">
+                <span>&#x25C0; &#x25B6;</span> Move &nbsp; <span>SPACE</span> Fire &nbsp; <span>P</span> Pause
+            </p>
+            <button id="startBtn">PLAY</button>
+            <div class="scores">
+                <h2>HIGH SCORES</h2>
+                <ol id="scoreList"></ol>
+            </div>
+        </div>
+
+        <div id="gameOver" class="overlay hidden">
+            <h1 id="gameOverTitle">GAME OVER</h1>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <div id="nameEntry">
+                <label>Enter your name:
+                    <input id="playerName" maxlength="12" autocomplete="off" />
+                </label>
+                <button id="saveScoreBtn">SAVE</button>
+            </div>
+            <button id="restartBtn">PLAY AGAIN</button>
+        </div>
+
+        <footer>
+            <p>Mobile: tap left/right of ship to move &middot; tap top half to fire</p>
+        </footer>
+    </div>
+
+    <script src="/game.js"></script>
+</body>
+</html>
