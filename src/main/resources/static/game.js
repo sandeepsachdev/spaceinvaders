@@ -279,10 +279,10 @@
         }
 
         // Stagger entries — every ~14 frames spawn next
-        let delay = 30;
+        let delay = 40;
         for (const g of groups) {
             state.spawnQueue.push({ ...g, delay });
-            delay += 8;
+            delay += 12;
         }
         state.spawnTimer = 0;
     }
@@ -309,7 +309,7 @@
             state: state.challenging ? 'challenge' : 'entering',
             path,
             pathIdx: 0,
-            pathSpeed: 1.6 + state.stage * 0.08,
+            pathSpeed: 1.0 + state.stage * 0.05,
             hp: ENEMY_TYPES[type].hp,
             wing: 0,
             wingTimer: Math.floor(Math.random() * 30),
@@ -381,7 +381,7 @@
         const dx = px - sx;
         const dy = py - sy;
         const d = Math.max(1, Math.sqrt(dx * dx + dy * dy));
-        const speed = 4 + state.stage * 0.15;
+        const speed = 2.8 + state.stage * 0.1;
         state.enemyBullets.push({
             x: sx, y: sy, w: 4, h: 10,
             vx: (dx / d) * speed,
@@ -482,14 +482,14 @@
             e.y = e.slotY;
             e.angle = 0;
             // Occasionally fire while in formation
-            if (!state.challenging && Math.random() < 0.0008 + state.stage * 0.0002) {
+            if (!state.challenging && Math.random() < 0.0004 + state.stage * 0.0001) {
                 enemyFire(e);
             }
         } else if (e.state === 'diving' || e.state === 'capture-dive') {
             const cur = e.path[Math.floor(e.pathIdx)];
             const next = e.path[Math.floor(e.pathIdx) + 2];
             if (next) e.angle = Math.atan2(next.y - cur.y, next.x - cur.x) + Math.PI / 2;
-            e.pathIdx += e.pathSpeed * 0.9;
+            e.pathIdx += e.pathSpeed * 0.75;
 
             if (e.state === 'capture-dive') {
                 // Halt mid-screen to deploy tractor beam
@@ -512,7 +512,7 @@
                 e.y = e.path[idx].y;
             } else {
                 // diving - fire occasionally
-                if (!state.challenging && Math.random() < 0.02 && e.y < H - 80) {
+                if (!state.challenging && Math.random() < 0.012 && e.y < H - 80) {
                     enemyFire(e);
                 }
                 const idx = Math.floor(e.pathIdx);
@@ -590,7 +590,7 @@
         const formation = state.enemies.filter(e => e.state === 'formation');
         if (formation.length === 0) return;
         state.diveTimer++;
-        const interval = Math.max(50, 130 - state.stage * 6);
+        const interval = Math.max(110, 210 - state.stage * 5);
         if (state.diveTimer >= interval) {
             state.diveTimer = 0;
             // Prefer lower rows first (bees / butterflies)
